@@ -1,0 +1,12 @@
+--- 
+- name: demo the logic 
+  hosts: localhost 
+  gather_facts: false  
+  vars: 
+    num1: 10 
+    num3: 10  
+  tasks: 
+    - name: logic and comparison 
+      ansible.builtin.debug: 
+        msg: "Can you read me?" 
+      when: num1 >= num3 and num1 is even and num2 is not defined 

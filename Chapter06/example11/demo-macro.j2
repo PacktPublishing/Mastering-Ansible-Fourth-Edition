@@ -1,0 +1,7 @@
+{% macro test() -%} 
+The text from the caller follows: 
+{{ caller() }} 
+{%- endmacro -%} 
+{% call test() -%} 
+This is text inside the call 
+{% endcall -%} 

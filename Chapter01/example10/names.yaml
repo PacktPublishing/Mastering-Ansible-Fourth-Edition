@@ -1,0 +1,25 @@
+--- 
+- name: play with a {{ var_name }} 
+  hosts: localhost 
+  gather_facts: false 
+ 
+  vars: 
+  - var_name: not-mastery 
+ 
+  tasks: 
+  - name: set a variable 
+    ansible.builtin.set_fact: 
+      task_var_name: "defined variable" 
+ 
+  - name: task with a {{ task_var_name }} 
+    ansible.builtin.debug: 
+      msg: "I am mastery task" 
+ 
+- name: second play with a {{ task_var_name }} 
+  hosts: localhost 
+  gather_facts: false 
+ 
+  tasks: 
+  - name: task with a {{ runtime_var_name }} 
+    ansible.builtin.debug: 
+      msg: "I am another mastery task"

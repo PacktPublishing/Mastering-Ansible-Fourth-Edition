@@ -1,0 +1,30 @@
+{
+ "collection_info": {
+  "namespace": "masterybook",
+  "name": "demo",
+  "version": "1.0.0",
+  "authors": [
+   "James Freeman <jamesfreeman@example.com>"
+  ],
+  "readme": "README.md",
+  "tags": [],
+  "description": "your collection description",
+  "license": [
+   "GPL-2.0-or-later"
+  ],
+  "license_file": null,
+  "dependencies": {},
+  "repository": "http://example.com/repository",
+  "documentation": "http://docs.example.com",
+  "homepage": "http://example.com",
+  "issues": "http://example.com/issue/tracker"
+ },
+ "file_manifest_file": {
+  "name": "FILES.json",
+  "ftype": "file",
+  "chksum_type": "sha256",
+  "chksum_sha256": "422f050fdce8cde814f31df80b0004acd4d6d935068438f25c17dd42eed02783",
+  "format": 1
+ },
+ "format": 1
+}

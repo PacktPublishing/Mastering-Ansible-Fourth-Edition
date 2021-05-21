@@ -1,0 +1,5 @@
+---
+filter_version:'1.0'
+module_blacklist:
+# Deprecated – to be removed in 3.0
+- sf_account_manager

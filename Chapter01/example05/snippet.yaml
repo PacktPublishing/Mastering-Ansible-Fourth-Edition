@@ -1,0 +1,5 @@
+- name: add new node into runtime inventory
+  ansible.builtin.add_host:
+    name: newmastery.example.name
+    groups: web
+    ansible_host: 192.168.10.30

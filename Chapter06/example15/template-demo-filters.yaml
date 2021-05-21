@@ -1,0 +1,9 @@
+--- 
+- name: demo the filters 
+  hosts: localhost 
+  gather_facts: false  
+  tasks: 
+    - name: shuffle the cards 
+      ansible.builtin.debug: 
+        msg: "{{ ['Ace', 'Queen', 'King', 'Deuce'] | shuffle }}" 
+

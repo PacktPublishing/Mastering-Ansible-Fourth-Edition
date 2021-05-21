@@ -1,0 +1,22 @@
+--- 
+- name: demo the filters 
+  hosts: localhost 
+  gather_facts: false  
+  tasks: 
+    - name: create a test file
+      ansible.builtin.lineinfile:
+        path: /tmp/derp
+        line: "Ansible is great!"
+        state: present
+        create: yes
+    - name: read file 
+      ansible.builtin.slurp: 
+        src: /tmp/derp 
+      register: derp  
+    - name: display file content (undecoded) 
+      ansible.builtin.debug: 
+        var: derp.content  
+    - name: display file content (decoded) 
+      ansible.builtin.debug: 
+        var: derp.content | b64decode
+

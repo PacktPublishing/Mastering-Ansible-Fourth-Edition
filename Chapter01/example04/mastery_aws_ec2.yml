@@ -1,0 +1,3 @@
+---
+plugin: amazon.aws.aws_ec2
+boto_profile: default

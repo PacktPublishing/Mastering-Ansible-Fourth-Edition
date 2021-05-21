@@ -1,0 +1,13 @@
+---
+- name: limit example play
+  hosts: all
+  gather_facts: false
+
+  tasks:
+    - name: tell us which host we are on
+      ansible.builtin.debug:
+        var: inventory_hostname
+
+    - name: grab variable data from backend
+      ansible.builtin.debug:
+        var: hostvars['backend.example.name']['ansible_port']

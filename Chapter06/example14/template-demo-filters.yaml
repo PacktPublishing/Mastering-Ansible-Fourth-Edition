@@ -1,0 +1,18 @@
+--- 
+- name: demo the filters 
+  hosts: localhost 
+  gather_facts: false  
+  tasks: 
+    - name: fail a task 
+      ansible.builtin.debug: 
+        msg: "I am not a change" 
+      register: derp  
+    - name: only do this on change 
+      ansible.builtin.debug: 
+        msg: "You had a change" 
+      when: derp is changed  
+    - name: only do this on success 
+      ansible.builtin.debug: 
+        msg: "You had a success" 
+      when: derp is success
+

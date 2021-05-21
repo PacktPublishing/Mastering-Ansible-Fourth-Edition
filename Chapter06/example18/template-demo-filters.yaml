@@ -1,0 +1,9 @@
+---
+- name: demo the filters
+  hosts: localhost
+  gather_facts: false
+  tasks:
+    - name: demo filter
+      debug:
+        msg: "{{ '~/.stackrc' | expanduser }}"
+

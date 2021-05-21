@@ -1,0 +1,12 @@
+--- 
+- name: show me an encrypted var 
+  hosts: localhost 
+  gather_facts: false 
+ 
+  vars_files: 
+    - a_vars_file.yaml 
+ 
+  tasks: 
+    - name: print the variable 
+      ansible.builtin.debug: 
+        var: something 

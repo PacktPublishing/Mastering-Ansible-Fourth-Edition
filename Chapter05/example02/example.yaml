@@ -1,0 +1,16 @@
+---
+- name: AWX example playbook
+  hosts: all
+  gather_facts: false
+
+  tasks:
+    - name: Create temporary directory
+      ansible.builtin.file:
+        path: /tmp/mastery
+        state: directory
+
+    - name: Create a file with example text
+      ansible.builtin.lineinfile:
+        path: /tmp/mastery/mastery.txt
+        line: 'Created with Ansible Mastery!'
+        create: yes

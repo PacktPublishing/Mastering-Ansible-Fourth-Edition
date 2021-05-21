@@ -1,0 +1,7 @@
+# data dirs 
+{% for dir in data_dirs -%} 
+data_dir = {{ dir }} 
+{% else -%} 
+# no data dirs found 
+{% endfor -%} 
+

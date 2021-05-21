@@ -1,0 +1,13 @@
+--- 
+- name: demo the template 
+  hosts: localhost 
+  gather_facts: false  
+  vars: 
+    setting: a_val 
+    feature: 
+      enabled: true
+    another_setting: b_val  
+  tasks: 
+    - name: pause with render 
+      pause: 
+        prompt: "{{ lookup('template', 'demo.j2') }}" 

@@ -1,0 +1,7 @@
+[windows]
+DEMODEM-O5NVEP9.mastery.example.com
+
+[windows:vars]
+ansible_user=administrator@MASTERY.EXAMPLE.COM
+ansible_password="Password123"
+ansible_shell_type=powershell

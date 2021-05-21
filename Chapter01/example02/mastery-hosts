@@ -1,0 +1,15 @@
+[web]
+mastery.example.name
+
+[dns]
+backend.example.name
+
+[database]
+backend.example.name
+
+[frontend:children]
+web
+
+[backend:children]
+dns
+database

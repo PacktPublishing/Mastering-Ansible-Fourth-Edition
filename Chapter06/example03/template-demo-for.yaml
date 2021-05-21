@@ -1,0 +1,10 @@
+--- 
+- name: demo the template 
+  hosts: localhost 
+  gather_facts: false  
+  vars: 
+    data_dirs: []
+  tasks: 
+    - name: pause with render 
+      ansible.builtin.pause: 
+        prompt: "{{ lookup('template', 'demo-for.j2') }}" 

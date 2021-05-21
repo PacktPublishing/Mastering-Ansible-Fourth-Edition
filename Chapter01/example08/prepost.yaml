@@ -1,0 +1,36 @@
+--- 
+- hosts: localhost 
+  gather_facts: false 
+ 
+  vars: 
+    - a_var: derp 
+ 
+  pre_tasks: 
+    - name: pretask 
+      ansible.builtin.debug: 
+        msg: "a pre task" 
+      changed_when: true 
+      notify: say hi 
+ 
+  roles: 
+    - role: simple 
+      derp: newval 
+ 
+  tasks: 
+    - name: task 
+      ansible.builtin.debug: 
+        msg: "a task" 
+      changed_when: true 
+      notify: say hi 
+ 
+  post_tasks: 
+    - name: posttask 
+      ansible.builtin.debug: 
+        msg: "a post task" 
+      changed_when: true 
+      notify: say hi 
+
+  handlers:
+    - name: say hi
+      ansible.builtin.debug:
+        msg: hi

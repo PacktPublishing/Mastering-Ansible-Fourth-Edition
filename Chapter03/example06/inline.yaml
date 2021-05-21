@@ -1,0 +1,13 @@
+--- 
+- name: inline secret variable demonstration
+  hosts: localhost 
+  gather_facts: false 
+ 
+  vars: 
+    my_secret:  secure_password 
+
+  tasks: 
+    - name: print the secure variable 
+      ansible.builtin.debug: 
+        var: my_secret
+

@@ -1,0 +1,23 @@
+--- 
+- name: Windows file example playbook
+  hosts: all 
+  gather_facts: false 
+ 
+  tasks: 
+    - name: Create temporary directory
+      ansible.windows.win_file:
+        path: 'C:\Mastery Test'
+        state: directory
+
+    - name: Copy across a test file
+      ansible.windows.win_copy:
+        src: mastery.txt
+        dest: 'C:\Mastery Test\mastery.txt'
+
+    - name: Create a directory using PowerShell
+      ansible.windows.win_shell: New-Item -Path C:\Mastery -ItemType Directory
+
+    - name: Create a directory using cmd.exe
+      ansible.windows.win_shell: mkdir C:\MasteryCMD
+      args:
+        executable: cmd

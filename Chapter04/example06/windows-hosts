@@ -1,0 +1,9 @@
+[windows]
+DEMODEM-O5NVEP9.mastery.example.com
+
+[windows:vars]
+ansible_user=administrator@MASTERY.EXAMPLE.COM
+ansible_password="Password123"
+ansible_port=5986
+ansible_connection=winrm
+ansible_winrm_ca_trust_path=/etc/ssl/certs/ca-certificates.crt

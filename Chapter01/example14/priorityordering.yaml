@@ -1,0 +1,14 @@
+---
+- name: group variable priority ordering example play
+  hosts: all
+  gather_facts: false
+
+  tasks:
+    - name: show assigned group variables
+      vars:
+        msg: |
+             http_port:{{ hostvars[inventory_hostname]['http_port'] }}
+             thread_count:{{ hostvars[inventory_hostname]['thread_count'] | default("undefined") }}
+             secure:{{ hostvars[inventory_hostname]['secure'] }}
+      ansible.builtin.debug:
+        msg: "{{ msg.split('\n') }}"

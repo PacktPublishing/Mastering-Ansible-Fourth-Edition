@@ -1,0 +1,11 @@
+---
+- name: demo the template
+  hosts: localhost
+  gather_facts: false
+  vars:
+    answers: "no so YES no"
+  tasks:
+    - name: debug the template
+      ansible.builtin.debug: 
+        msg: "{{ answers | replace('no', 'yes') | lower }}" 
+

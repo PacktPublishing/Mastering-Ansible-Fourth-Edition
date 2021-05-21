@@ -1,0 +1,5 @@
+{% macro test() -%} 
+{{ varargs }} 
+{{ test.catch_varargs }} 
+{%- endmacro -%} 
+{{ test('surprise') }} 

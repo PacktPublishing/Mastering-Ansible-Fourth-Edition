@@ -1,0 +1,10 @@
+# data dirs 
+{% for dir in data_dirs if dir != "/" -%} 
+{% if loop.first -%} 
+data_dir = {{ dir }}, 
+           {% else -%} 
+           {{ dir }}, 
+{% endif -%} 
+{% else -%} 
+# no data dirs found 
+{% endfor -%} 

@@ -1,0 +1,13 @@
+# data dirs. 
+{% macro comma(loop) -%} 
+{{ ',' if not loop.last else '' }} 
+{%- endmacro -%} 
+{% for dir in data_dirs if dir != "/" -%} 
+{% if loop.first -%} 
+data_dir = {{ dir }}{{ comma(loop) }}
+           {% else -%} 
+           {{ dir }}{{ comma(loop) }}
+{% endif -%} 
+{% else -%} 
+# no data dirs found 
+{% endfor -%}

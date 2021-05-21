@@ -1,0 +1,9 @@
+---
+- name: demo the filters
+  hosts: localhost
+  gather_facts: false
+  tasks:
+    - name: demo basename
+      ansible.builtin.debug:
+        msg: "{{ '/var/log/nova/nova-api.log' | basename }}"
+

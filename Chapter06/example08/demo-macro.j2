@@ -1,0 +1,5 @@
+{% macro test(var_a='a string') -%} 
+{{ test.arguments }} 
+{{ test.defaults }}
+{%- endmacro -%} 
+{{ test() }} 

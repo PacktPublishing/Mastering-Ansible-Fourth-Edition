@@ -1,0 +1,7 @@
+---
+collections:
+- name: geerlingguy.k8s
+
+- name: geerlingguy.php_roles
+  version: 1.0.0
+

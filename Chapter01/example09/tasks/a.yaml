@@ -1,0 +1,7 @@
+--- 
+- name: where am I 
+  ansible.builtin.debug: 
+    msg: "I am task a" 
+ 
+- ansible.builtin.include: b.yaml 
+

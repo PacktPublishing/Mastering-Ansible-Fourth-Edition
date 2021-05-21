@@ -1,0 +1,6 @@
+--- 
+- name: print a variable 
+  ansible.builtin.debug:     
+    var: derp 
+  changed_when: true 
+  notify: say hi 

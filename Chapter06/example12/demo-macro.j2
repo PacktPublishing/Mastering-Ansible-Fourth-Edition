@@ -1,0 +1,13 @@
+{% macro test(group, hosts) -%} 
+[{{ group }}] 
+{% for host in hosts -%} 
+{{ host }} {{ caller(host) }} 
+{%- endfor -%} 
+{%- endmacro -%}  
+{% call(host) test('web', ['host1', 'host2', 'host3']) -%} 
+ssh_host_name={{ host }}.example.name ansible_sudo=true 
+{% endcall -%}  
+{% call(host) test('db', ['db1', 'db2']) -%} 
+ssh_host_name={{ host }}.example.name 
+{% endcall -%}
+

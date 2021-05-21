@@ -1,0 +1,17 @@
+[frontend]
+host1.example.com
+host2.example.com
+
+[web:children]
+frontend
+
+[web:vars]
+http_port=80
+secure=true
+
+[proxy]
+host1.example.com
+
+[proxy:vars]
+http_port=8080
+thread_count=10

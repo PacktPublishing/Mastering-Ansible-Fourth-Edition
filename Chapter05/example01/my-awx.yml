@@ -1,0 +1,11 @@
+apiVersion: awx.ansible.com/v1beta1
+kind: AWX
+metadata:
+  name: awx
+spec:
+  tower_ingress_type: Ingress
+  tower_ingress_tls_secret: awx-secret-ssl
+  tower_hostname: awx.example.org
+  tower_projects_existing_claim: awx-pvc
+  tower_projects_persistence: true
+

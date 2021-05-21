@@ -1,0 +1,11 @@
+--- 
+- name: demo the template 
+  hosts: localhost 
+  gather_facts: false 
+  vars: 
+    api: 
+      v2: true
+  tasks: 
+    - name: pause with render 
+      ansible.builtin.debug: 
+        msg: "API = cinder{{ 'v2' if api.v2 else '' }}" 
