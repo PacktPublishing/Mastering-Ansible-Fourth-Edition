@@ -1,0 +1,10 @@
+--- 
+- name: error handling 
+  hosts: localhost
+  gather_facts: false 
+ 
+  tasks: 
+  - name: broken website 
+    ansible.builtin.uri: 
+      url: http://notahost.nodomain 
+    ignore_errors: true 

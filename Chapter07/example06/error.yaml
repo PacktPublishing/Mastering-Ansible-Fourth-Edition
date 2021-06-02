@@ -1,0 +1,17 @@
+--- 
+- name: error handling 
+  hosts: localhost
+  gather_facts: false 
+ 
+  tasks: 
+  - name: check if branch badfeature exists 
+    ansible.builtin.command: git branch 
+    args: 
+      chdir: /srv/app 
+    register: branches  
+
+  - name: delete branch bad 
+    ansible.builtin.command: git branch -D badfeature 
+    args: 
+      chdir: /srv/app 
+    when: branches.stdout is search('badfeature') 

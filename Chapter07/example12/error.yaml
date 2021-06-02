@@ -1,0 +1,27 @@
+--- 
+- name: error handling 
+  hosts: localhost 
+  gather_facts: false 
+ 
+  tasks: 
+  - block: 
+      - name: delete branch bad 
+        ansible.builtin.command: git branch -D badfeature 
+        args: 
+          chdir: /srv/app 
+ 
+      - name: this task is lost 
+        ansible.builtin.debug: 
+          msg: "I do not get seen" 
+ 
+    rescue: 
+      - name: cleanup task 
+        ansible.builtin.debug:            
+          msg: "I am cleaning up" 
+
+      - name: cleanup task 2 
+        ansible.builtin.debug: 
+          msg: "I am also cleaning up"  
+  - name: task after block 
+    ansible.builtin.debug: 
+      msg: "Execution goes on" 

@@ -1,0 +1,14 @@
+--- 
+- name: error handling 
+  hosts: localhost
+  gather_facts: false 
+ 
+  tasks: 
+  - name: discover iscsi sessions
+    ansible.builtin.command: /sbin/iscsiadm -m session
+    register: sessions
+    failed_when:
+      - sessions.rc != 0
+      - not sessions.stderr is
+        search('No active sessions')
+    changed_when: false

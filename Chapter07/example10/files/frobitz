@@ -1,0 +1,3 @@
+#!/bin/bash 
+rm -rf /srv/whiskey/tango 
+mkdir -p /srv/whiskey/tango 

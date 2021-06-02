@@ -1,0 +1,14 @@
+---
+- name: looping demo
+  hosts: localhost
+  gather_facts: false
+  become: true
+
+  tasks:
+  - name: create a directory
+    ansible.builtin.file:
+      path: "{{ item }}"
+      state: directory
+    loop:
+      - /srv/whiskey/alpha
+      - /srv/whiskey/beta

@@ -1,0 +1,14 @@
+--- 
+- name: error handling 
+  hosts: localhost
+  gather_facts: false 
+ 
+  tasks: 
+  - name: delete branch bad
+    ansible.builtin.command: git branch -D badfeature
+    args:
+      chdir: /srv/app
+    register: gitout
+    failed_when:
+      - gitout.rc != 0
+      - not gitout.stderr is search('branch.*not found')

@@ -1,0 +1,12 @@
+--- 
+- name: error handling 
+  hosts: localhost
+  gather_facts: false 
+ 
+  tasks: 
+  - name: discover tango directory 
+    ansible.builtin.stat: path=/srv/whiskey/tango 
+    register: tango  
+  - name: run frobitz 
+    ansible.builtin.script: files/frobitz --initialize /srv/whiskey/tango 
+    when: not tango.stat.exists 

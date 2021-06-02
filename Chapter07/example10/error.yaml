@@ -1,0 +1,10 @@
+--- 
+- name: error handling 
+  hosts: localhost
+  gather_facts: false 
+ 
+  tasks: 
+  - name: run frobitz 
+    ansible.builtin.script: files/frobitz 
+    args:
+      creates: /srv/whiskey/tango 
