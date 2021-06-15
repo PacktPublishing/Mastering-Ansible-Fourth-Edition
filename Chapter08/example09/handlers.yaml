@@ -1,0 +1,4 @@
+---
+- name: a handler
+  ansible.builtin.debug:
+    msg: "handling a thing"

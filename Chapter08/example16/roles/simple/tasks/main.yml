@@ -1,0 +1,4 @@
+--- 
+- name: print a variable 
+  ansible.builtin.debug: 
+    var: derp

@@ -1,0 +1,16 @@
+---
+- name: vars
+  hosts: localhost
+  gather_facts: true
+
+  tasks:
+  - name: load variables
+    ansible.builtin.include_vars: "{{ item }}"
+    with_first_found:
+      - "{{ ansible_distribution }}.yaml"
+      - "{{ ansible_os_family }}.yaml"
+      - variables.yaml
+
+  - name: a task
+    ansible.builtin.debug:
+      msg: "I am a {{ varname }}"

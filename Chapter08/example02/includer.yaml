@@ -1,0 +1,15 @@
+--- 
+- name: task inclusion 
+  hosts: localhost 
+  gather_facts: false 
+
+  tasks:
+  - name: non-included task
+    ansible.builtin.debug:
+      msg: "I am not included"
+
+  - ansible.builtin.include: more-tasks.yaml
+
+  - name: after-included tasks
+    ansible.builtin.debug:
+      msg: "I run last" 

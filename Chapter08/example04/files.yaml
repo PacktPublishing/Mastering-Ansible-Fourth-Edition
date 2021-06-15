@@ -1,0 +1,12 @@
+--- 
+- name: create leading path 
+  ansible.builtin.file: 
+    path: "{{ item.value.path }}" 
+    state: directory 
+  loop: "{{ files | dict2items }}" 
+ 
+- name: touch the file 
+  ansible.builtin.file: 
+    path: "{{ item.value.path + '/' + item.key }}" 
+    state: touch 
+  loop: "{{ files | dict2items }}" 

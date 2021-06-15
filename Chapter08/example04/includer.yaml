@@ -1,0 +1,13 @@
+---
+- name: touch files
+  hosts: localhost
+  gather_facts: false
+
+  tasks:
+  - ansible.builtin.include: files.yaml
+    vars:
+      files:
+        herp:
+          path: /tmp/foo
+        derp:
+          path: /tmp/foo

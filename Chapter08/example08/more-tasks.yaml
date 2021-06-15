@@ -1,0 +1,7 @@
+--- 
+- name: included task 1 
+  ansible.builtin.debug: 
+    msg: "I combine {{ item }} and {{ include_item }}" 
+  loop: 
+    - a 
+    - b 

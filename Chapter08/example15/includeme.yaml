@@ -1,0 +1,10 @@
+--- 
+- name: include playbook
+  hosts: localhost 
+  gather_facts: false 
+ 
+  tasks: 
+  - name: an included playbook task
+    ansible.builtin.debug: 
+      msg: "I am in the included playbook"
+ 

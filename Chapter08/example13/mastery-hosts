@@ -1,0 +1,5 @@
+[demo]
+localhost
+
+[demo:vars]
+ansible_connection=local

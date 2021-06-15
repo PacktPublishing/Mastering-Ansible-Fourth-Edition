@@ -1,0 +1,4 @@
+---
+- name: included task
+  ansible.builtin.debug:
+    msg: "My data is {{ data }}"

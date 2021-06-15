@@ -1,0 +1,12 @@
+---
+- name: task inclusion
+  hosts: localhost
+  gather_facts: false
+
+  tasks:
+  - ansible.builtin.include: more-tasks.yaml
+    loop:
+      - one
+      - two
+    loop_control:
+      loop_var: include_item

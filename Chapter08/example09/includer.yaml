@@ -1,0 +1,15 @@
+--- 
+- name: touch files 
+  hosts: localhost 
+  gather_facts: false 
+ 
+  tasks: 
+  - name: a task 
+    ansible.builtin.debug: 
+      msg: "I am a changing task" 
+    changed_when: true 
+    notify: a handler 
+ 
+  handlers: 
+  - ansible.builtin.include: handlers.yaml 
+    when: foo | default('true') | bool 

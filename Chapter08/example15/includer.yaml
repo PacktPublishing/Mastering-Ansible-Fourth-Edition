@@ -1,0 +1,12 @@
+--- 
+- name: include playbook
+  hosts: localhost 
+  gather_facts: false 
+ 
+  tasks: 
+  - name: a task
+    debug: 
+      msg: "I am in the main playbook"
+- name: include a playbook
+  ansible.builtin.import_playbook: includeme.yaml
+ 

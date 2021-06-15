@@ -1,0 +1,12 @@
+--- 
+- name: vars 
+  hosts: localhost 
+  gather_facts: false 
+ 
+  vars_files: 
+  - "{{ varfile }}" 
+ 
+  tasks: 
+  - name: a task 
+    ansible.builtin.debug: 
+      msg: "I am a {{ varname }}" 

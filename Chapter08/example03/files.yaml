@@ -1,0 +1,10 @@
+---
+- name: create leading path
+  ansible.builtin.file:
+    path: "{{ path }}"
+    state: directory
+
+- name: touch the ansible.builtin.file
+  ansible.builtin.file:
+    path: "{{ path + '/' + file }}"
+    state: touch

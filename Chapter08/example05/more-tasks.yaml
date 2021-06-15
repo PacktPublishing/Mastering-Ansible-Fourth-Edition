@@ -1,0 +1,10 @@
+---
+- name: included task 1
+  ansible.builtin.debug:
+    msg: "I am the first included task"
+  loop: "{{ a_list }}"
+
+- name: include task 2
+  ansible.builtin.debug:
+    msg: "I am the second included task"
+  loop: "{{ a_list }}"
