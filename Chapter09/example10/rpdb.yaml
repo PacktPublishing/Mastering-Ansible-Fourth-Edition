@@ -1,0 +1,12 @@
+--- 
+- name: remote code debug 
+  hosts: debug.example.com 
+  gather_facts: false 
+  become: true
+ 
+  tasks: 
+    - name: a remote module execution 
+      systemd: 
+        name: nginx
+        state: stopped 
+        enabled: no 

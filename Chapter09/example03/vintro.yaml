@@ -1,0 +1,9 @@
+--- 
+- name: variable introspection demo 
+  hosts: localhost 
+ 
+  tasks: 
+    - name: show a complex hash 
+      ansible.builtin.debug: 
+        var: ansible_python 
+
