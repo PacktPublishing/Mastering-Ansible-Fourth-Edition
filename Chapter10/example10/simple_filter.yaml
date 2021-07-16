@@ -1,0 +1,10 @@
+--- 
+- name: test cloud_truth filter 
+  hosts: localhost 
+  gather_facts: false 
+  vars: 
+    statement: "I store my files in the cloud" 
+  tasks: 
+  - name: make a statement 
+    ansible.builtin.debug: 
+      msg: "{{ statement | cloud_truth }}" 

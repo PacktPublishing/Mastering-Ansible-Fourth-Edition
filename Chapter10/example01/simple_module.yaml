@@ -1,0 +1,15 @@
+--- 
+- name: test remote_copy module 
+  hosts: localhost 
+  gather_facts: false 
+ 
+  tasks: 
+  - name: ensure foo 
+    ansible.builtin.file: 
+      path: /tmp/rcfoo 
+      state: touch 
+ 
+  - name: do a remote copy 
+    remote_copy: 
+      source: /tmp/rcfoo 
+      dest: /tmp/rcbar 

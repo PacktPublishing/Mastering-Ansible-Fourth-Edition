@@ -1,0 +1,10 @@
+--- 
+- name: test the inventory 
+  hosts: all 
+  gather_facts: false 
+ 
+  tasks: 
+  - name: hello world 
+    ansible.builtin.debug: 
+      msg: "Hello world, I am {{ inventory_hostname }}. 
+            My username is {{ ansible_ssh_user }}"
