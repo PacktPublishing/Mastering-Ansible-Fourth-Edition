@@ -1,0 +1,6 @@
+---
+- name: Create a file
+  ansible.builtin.file:
+    path: "{{ pathname }}/{{ item }}"
+    state: touch
+  loop: "{{ files }}"

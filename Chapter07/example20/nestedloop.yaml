@@ -1,0 +1,18 @@
+---
+- name: Nested loop demo 2
+  hosts: all
+  gather_facts: no
+  vars:
+    paths:
+      - /tmp
+      - /var/tmp
+    files:
+      - test1
+      - test2
+
+  tasks:
+    - name: Create files with nested loop
+      ansible.builtin.include_tasks: createfile.yml
+      loop: "{{ paths }}"
+      loop_control:
+        loop_var: pathname

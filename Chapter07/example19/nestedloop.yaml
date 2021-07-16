@@ -1,0 +1,18 @@
+---
+- name: Nested loop demo 1
+  hosts: all
+  gather_facts: no
+  vars:
+    paths:
+      - /tmp
+      - /var/tmp
+    files:
+      - test1
+      - test2
+
+  tasks:
+    - name: Create files with nested loop
+      ansible.builtin.file:
+        path: "{{ item[0] }}/{{ item[1] }}"
+        state: touch
+      loop: "{{ paths | product(files) | list }}"
