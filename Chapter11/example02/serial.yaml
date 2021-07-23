@@ -1,0 +1,48 @@
+--- 
+- name: Create new foo servers 
+  hosts: localhost 
+ 
+  tasks: 
+  - name: launch instances 
+    openstack.cloud.os_server: 
+      name: foo-appv{{ version }}-{{ item }} 
+      image: foo-appv{{ version }} 
+      flavor: 4 
+      key_name: ansible-prod 
+      security_groups: foo-app 
+      auto_floating_ip: false 
+      state: present 
+      auth: 
+        auth_url: https://me.openstack.blueboxgrid.com:5001/v2.0 
+        username: jlk 
+        password: FAKEPASSW0RD 
+        project_name: mastery 
+    register: launch
+    loop: "{{ range(1, 8 + 1, 1)|list }}"
+
+  - name: add hosts 
+    ansible.builtin.add_host: 
+      name: "{{ item.openstack.name }}" 
+      ansible_ssh_host: "{{ item.openstack.private_v4 }}" 
+      groups: new-foo-app 
+    with_items: launch.results 
+
+- name: Ensure new app 
+  hosts: new-foo-app 
+  tasks: 
+  - name: ensure healthy service 
+    ansible.builtin.wait_for: 
+      port: 80 
+
+- name: Configure load balancer 
+  hosts: foo-lb 
+  tasks: 
+  - name: haproxy config 
+    ansible.builtin.template: 
+      dest: /etc/haproxy/haproxy.cfg 
+      src: templates/etc/haproxy/haproxy.cfg 
+
+  - name: reload haproxy 
+    ansible.builtin.service: 
+      name: haproxy 
+      state: reloaded 

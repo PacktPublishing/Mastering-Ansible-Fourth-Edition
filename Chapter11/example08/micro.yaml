@@ -1,0 +1,34 @@
+---
+- name: apply microA
+  hosts: localhost
+  gather_facts: false
+
+  roles:
+  - role: microA
+
+- name: apply microB
+  hosts: localhost
+  gather_facts: false
+
+  roles:
+  - role: microB
+
+- name: restart microA
+  hosts: localhost
+  gather_facts: false
+
+  tasks:
+  - name: restart microA for upgrade
+    ansible.builtin.debug:
+      msg: "microA is restarting"
+    when: upgrade | default(false) | bool
+
+- name: restart microB
+  hosts: localhost
+  gather_facts: false
+
+  tasks:
+  - name: restart microB for upgrade
+    ansible.builtin.debug:
+      msg: "microB is restarting"
+    when: upgrade | default(false) | bool

@@ -1,0 +1,16 @@
+--- 
+- name: run once test 
+  hosts: failtest[0:1] 
+  gather_facts: false 
+ 
+  tasks: 
+  - name: do a thing 
+    ansible.builtin.debug: 
+      msg: "I am groot" 
+    register: groot 
+    run_once: true 
+
+  - name: what is groot 
+    ansible.builtin.debug: 
+      var: groot 
+    when: inventory_hostname == play_hosts[-1] 

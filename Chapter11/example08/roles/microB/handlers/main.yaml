@@ -1,0 +1,5 @@
+---    
+- name: restart microB 
+  ansible.builtin.debug: 
+    msg: "microB is restarting" 
+  when: not upgrade | default(false) | bool 

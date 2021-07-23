@@ -1,0 +1,27 @@
+--- 
+- name: any errors fatal 
+  hosts: failtest 
+  gather_facts: false 
+
+  tasks:
+  - name: run first
+    ansible.builtin.debug:
+      msg: "I am a change"
+    changed_when: true
+    when: inventory_hostname == play_hosts[-1]
+    notify: critical handler
+
+  - name: change a host
+    ansible.builtin.fail:
+      msg: "I am last"
+    when: inventory_hostname == play_hosts[-1] 
+
+  - name: never run
+    ansible.builtin.debug:
+      msg: "I should never be run"
+    when: inventory_hostname == play_hosts[-1]
+
+  handlers:
+  - name: critical handler
+    ansible.builtin.debug:
+      msg: "I really need to run"

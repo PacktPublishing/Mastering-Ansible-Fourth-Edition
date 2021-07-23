@@ -1,0 +1,41 @@
+--- 
+- name: Upgrade foo-app in place 
+  hosts: foo-app 
+  serial: 2 
+
+  tasks: 
+  - name: disable member in balancer 
+    community.general.haproxy: 
+      backend: foo-app 
+      host: "{{ inventory_hostname }}" 
+      state: disabled 
+    delegate_to: foo-lb 
+
+  - name: pull stable foo-app 
+    ansible.builtin.git: 
+      repo: "{{ foo-app.repo }}" 
+      dest: /srv/foo-app/ 
+      version: "{{ foo-version }}" 
+    notify: 
+      - reload nginx 
+
+  - meta: flush_handlers 
+
+  - name: ensure healthy service 
+    ansible.builtin.wait_for: 
+      port: 80 
+
+  - name: enable member in balancer 
+    community.general.haproxy: 
+      backend: foo-app 
+      host: "{{ inventory_hostname }}" 
+      state: enabled 
+    delegate_to: foo-lb 
+
+  handlers: 
+  - name: reload nginx 
+    ansible.builtin.service: 
+      name: nginx 
+      state: restarted 
+
+

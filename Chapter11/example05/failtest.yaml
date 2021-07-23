@@ -1,0 +1,16 @@
+--- 
+- name: any errors fatal 
+  hosts: failtest 
+  gather_facts: false 
+  max_fail_percentage: 20 
+
+  tasks: 
+  - name: fail last host 
+    ansible.builtin.fail: 
+      msg: "I am last" 
+    when: inventory_hostname in play_hosts[0:3] 
+
+  - name: never run 
+    ansible.builtin.debug: 
+      msg: "I should never be run" 
+    when: inventory_hostname == play_hosts[-1]

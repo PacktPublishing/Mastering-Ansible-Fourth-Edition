@@ -1,0 +1,6 @@
+--- 
+- name: install microA package 
+  ansible.builtin.debug: 
+    msg: "This is installing A" 
+  changed_when: true 
+  notify: restart microA 

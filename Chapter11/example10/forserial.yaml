@@ -1,0 +1,23 @@
+--- 
+- name: parallel and serial 
+  hosts: failtest[0:3] 
+  gather_facts: false 
+ 
+  tasks: 
+  - name: do a thing 
+    ansible.builtin.debug: 
+      msg: "I am groot" 
+    changed_when: inventory_hostname in play_hosts[0:2] 
+    register: groot 
+    notify: restart groot 
+ 
+  handlers: 
+  - name: restart groot 
+    ansible.builtin.debug: 
+      msg: "I am groot?" 
+    loop: "{{ play_hosts }}" 
+    delegate_to: "{{ item }}" 
+    run_once: true 
+    when: hostvars[item]['groot']['changed'] | bool 
+    loop_control: 
+      pause: 2 
