@@ -1,0 +1,14 @@
+--- 
+- name: configure server 
+  hosts: all
+  gather_facts: false 
+  remote_user: fedora 
+ 
+  tasks: 
+    - name: install python 
+      ansible.builtin.raw: "sudo dnf install -y python python-dnf" 
+ 
+    - name: install imagemagick 
+      ansible.builtin.dnf: 
+        name: "ImageMagick" 
+      become: "yes" 

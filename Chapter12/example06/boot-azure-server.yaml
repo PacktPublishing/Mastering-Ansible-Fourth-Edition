@@ -1,0 +1,60 @@
+--- 
+- name: boot server 
+  hosts: localhost 
+  gather_facts: false
+  vars:
+    vm_password: Password123!
+
+  tasks: 
+    - name: boot the server 
+      azure.azcollection.azure_rm_virtualmachine:
+        ad_user: masteryadmin@example.com
+        password: < insert your ad password here >
+        subscription_id: xxxxxxxx-xxxxxx-xxxxxx-xxxxxxxx
+        resource_group: mastery
+        name: mastery1
+        admin_username: fedora
+        admin_password: "{{ vm_password }}"
+        vm_size: Standard_B1s
+        managed_disk_type: "Standard_LRS"
+        image:
+          offer: fedora
+          publisher: tunnelbiz
+          sku: fedoraupdate
+          version: 34.0.1
+        plan:
+          name: fedoraupdate
+          product: fedora
+          publisher : tunnelbiz
+      register: newserver
+
+    - name: show floating ip 
+      ansible.builtin.debug: 
+        var: newserver.ansible_facts.azure_vm.properties.networkProfile.networkInterfaces[0].properties.ipConfigurations[0].properties.publicIPAddress.properties.ipAddress
+
+    - name: Wait for SSH to come up
+      ansible.builtin.wait_for_connection:
+        delay: 1
+        timeout: 320
+
+    - name: add new server 
+      ansible.builtin.add_host: 
+        name: "mastery1" 
+        ansible_ssh_host: "{{ newserver.ansible_facts.azure_vm.properties.networkProfile.networkInterfaces[0].properties.ipConfigurations[0].properties.publicIPAddress.properties.ipAddress }}"
+        ansible_ssh_user: "fedora"
+        ansible_ssh_pass: "{{ vm_password }}"
+        ansible_become_pass: "{{ vm_password }}"
+
+- name: configure server
+  hosts: mastery1
+  gather_facts: false
+
+  tasks:
+    - name: install python 
+      ansible.builtin.raw: "dnf install -y python python-dnf" 
+      become: "yes"
+
+    - name: install imagemagick
+      ansible.builtin.dnf:
+        name: "ImageMagick"
+      become: "yes"

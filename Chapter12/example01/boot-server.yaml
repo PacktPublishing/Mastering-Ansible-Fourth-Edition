@@ -1,0 +1,20 @@
+--- 
+- name: boot server 
+  hosts: localhost 
+  gather_facts: false 
+
+  tasks:
+    - name: boot the server
+      openstack.cloud.server:
+        auth:
+          auth_url: "http://10.0.50.32/identity/v3"
+          username: "demo"
+          password: "password"
+          project_name: "demo"
+          project_domain_name: "default"
+          user_domain_name: "default"
+        flavor: "ds1G"
+        image: "Fedora34"
+        key_name: "mastery-key"
+        network: "private"
+        name: "mastery1" 

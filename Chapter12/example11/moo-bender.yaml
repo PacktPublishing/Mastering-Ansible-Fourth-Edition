@@ -1,0 +1,26 @@
+--- 
+- name: build an image with ansible-bender
+  hosts: localhost 
+  gather_facts: false 
+  vars:
+    ansible_bender:
+      base_image: fedora:34
+      target_image:
+        name: fedora-moo
+        cmd: nginx &
+ 
+  tasks: 
+    - name: install things 
+      ansible.builtin.raw: dnf install -y python-dnf 
+ 
+    - name: install things 
+      ansible.builtin.dnf: 
+        name: ['nginx', 'cowsay']
+ 
+    - name: configure nginx 
+      ansible.builtin.lineinfile: 
+        line: "daemon off;" 
+        dest: /etc/nginx/nginx.conf 
+ 
+    - name: boop 
+      ansible.builtin.shell: cowsay boop > /usr/share/nginx/html/index.html 

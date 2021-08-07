@@ -1,0 +1,21 @@
+--- 
+- name: build an image 
+  hosts: localhost 
+  gather_facts: false 
+ 
+  tasks: 
+    - name: build that image 
+      community.docker.docker_image: 
+        build:
+          path: . 
+        state: present 
+        name: fedora-moo 
+        source: build
+ 
+    - name: start the container 
+      community.docker.docker_container: 
+        name: playbook-container 
+        image: fedora-moo 
+        ports: 8080:80 
+        state: started 
+        container_default_behavior: no_defaults

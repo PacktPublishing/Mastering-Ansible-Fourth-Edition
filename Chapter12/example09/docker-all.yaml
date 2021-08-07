@@ -1,0 +1,43 @@
+--- 
+- name: build an image 
+  hosts: localhost 
+  gather_facts: false 
+ 
+  tasks: 
+    - name: start the container 
+      community.docker.docker_container: 
+        name: playbook-container 
+        image: docker.io/fedora:34
+        ports: 8080:80 
+        state: started 
+        command: sleep 500 
+        container_default_behavior: no_defaults
+ 
+    - name: make a host 
+      ansible.builtin.add_host: 
+        name: playbook-container 
+        ansible_connection: docker 
+        ansible_ssh_user: root
+ 
+- name: do things 
+  hosts: playbook-container 
+  gather_facts: false 
+ 
+  tasks: 
+    - name: install things 
+      ansible.builtin.raw: dnf install -y python-dnf 
+ 
+    - name: install things 
+      ansible.builtin.dnf: 
+        name: ['nginx', 'cowsay']
+ 
+    - name: configure nginx 
+      ansible.builtin.lineinfile: 
+        line: "daemon off;" 
+        dest: /etc/nginx/nginx.conf 
+ 
+    - name: boop 
+      ansible.builtin.shell: cowsay boop > /usr/share/nginx/html/index.html 
+ 
+    - name: run nginx 
+      ansible.builtin.shell: nginx & 

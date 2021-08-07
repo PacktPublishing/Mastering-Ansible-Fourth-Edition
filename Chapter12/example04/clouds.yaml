@@ -1,0 +1,9 @@
+clouds:
+  mastery_cloud:
+    auth:
+      auth_url: "http://10.0.50.32/identity/v3"
+      username: "admin"
+      password: "password"
+      project_name: "demo"
+      project_domain_name: "default"
+      user_domain_name: "default"
