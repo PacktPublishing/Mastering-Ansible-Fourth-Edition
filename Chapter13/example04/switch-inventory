@@ -1,0 +1,22 @@
+[switches:children]
+eos
+cumulus
+
+[eos]
+mastery-eos ansible_host=10.0.50.99
+
+[cumulus]
+mastery-switch1 ansible_host=10.0.50.110
+
+[cumulus:vars]
+ansible_user=cumulus
+ansible_password=password
+
+[eos:vars]
+ansible_connection=ansible.netcommon.network_cli
+ansible_network_os=arista.eos.eos
+ansible_user=admin
+ansible_password=admin
+ansible_become=yes
+ansible_become_method=enable
+

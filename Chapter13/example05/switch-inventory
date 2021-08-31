@@ -1,0 +1,7 @@
+[cumulus]
+mastery-switch1 ansible_host=10.0.50.110
+
+[cumulus:vars]
+ansible_user=cumulus
+ansible_ssh_pass=password
+ansible_ssh_common_args='-o ProxyCommand="ssh -W %h:%p -q jfreeman@bastion01.example.com"'

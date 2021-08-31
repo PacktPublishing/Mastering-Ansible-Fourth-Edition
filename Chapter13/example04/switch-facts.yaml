@@ -1,0 +1,12 @@
+---
+- name: "gather all device facts"
+  hosts: all
+  gather_facts: false
+
+  tasks:
+  - name: gather eos facts
+    arista.eos.eos_facts:
+    when: ansible_network_os is defined and ansible_network_os == 'arista.eos.eos'
+  - name: gather cumulus facts
+    ansible.builtin.setup:
+    when: inventory_hostname in groups['cumulus']

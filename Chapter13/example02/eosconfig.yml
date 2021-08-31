@@ -1,0 +1,17 @@
+---
+- name: A simple play to enable Ethernet1 on our virtual switch and write the config
+  hosts: all
+  gather_facts: no
+
+  tasks:
+    - name: Enable Ethernet1 on the switch
+      arista.eos.eos_interfaces:
+        config:
+        - name: Ethernet1
+          enabled: yes
+          description: Managed by Ansible
+        state: replaced
+
+    - name: Write the config to flash if it has been modified
+      arista.eos.eos_config:
+        save_when: modified

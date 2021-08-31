@@ -2,7 +2,7 @@
 
 Tested on:
 - Ubuntu Server 20.04
-- Ansible 4.0.0, ansible-base 2.11.1
+- Ansible 4.3.0, ansible-core 2.11.3
 
 This example requires you to edit a core Ansible file - it might be worth making a backup before proceeding. Also be sure to reverse any changes you made in the previous example before attempting this one.
 

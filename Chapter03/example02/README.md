@@ -2,7 +2,7 @@
 
 Tested on:
 - Ubuntu Server 20.04
-- Ansible 4.0.0, ansible-base 2.11.1
+- Ansible 4.3.0, ansible-core 2.11.3
 
 Create a password file for your new Vault using the command:
 

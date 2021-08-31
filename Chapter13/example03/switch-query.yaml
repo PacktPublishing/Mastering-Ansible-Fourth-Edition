@@ -1,0 +1,15 @@
+--- 
+- name: query switch
+  hosts: mastery-switch1
+ 
+  tasks: 
+  - name: query swp1 interface
+    community.network.nclu:
+      commands:
+        - show interface swp1
+    register: interface
+    when: inventory_hostname in groups['cumulus']
+
+  - name: print interface status
+    ansible.builtin.debug:
+      var: interface

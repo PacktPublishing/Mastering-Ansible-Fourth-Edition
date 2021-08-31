@@ -1,0 +1,6 @@
+[cumulus]
+mastery-switch1 ansible_host=10.0.50.110
+
+[cumulus:vars]
+ansible_user=cumulus
+ansible_ssh_pass=password

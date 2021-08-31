@@ -1,0 +1,15 @@
+---
+- name: reset an F5
+  hosts: localhost
+  gather_facts: false
+
+  tasks:
+    - name: reset my F5
+      f5networks.f5_modules.bigip_config:
+        reset: yes
+        save: yes
+        provider:
+          server: lb.mastery.example.com
+          user: admin
+          password: mastery
+          validate_certs: no 
